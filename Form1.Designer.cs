@@ -205,7 +205,7 @@ namespace Joel_Gramajo_202008025_Lab3_repaso
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(244, 23);
             this.button2.TabIndex = 15;
-            this.button2.Text = "button2";
+            this.button2.Text = "Agregar";
             this.button2.UseVisualStyleBackColor = true;
             // 
             // dataGridView1
@@ -321,7 +321,7 @@ namespace Joel_Gramajo_202008025_Lab3_repaso
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Control de propiedades";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
