@@ -22,5 +22,10 @@ namespace Joel_Gramajo_202008025_Lab3_repaso
             this.Nombre = nombre;
             this.Apellido = apellido;
         }
+
+        public override string ToString()
+        {
+            return this.dpi + ";" + this.nombre + ";" + this.apellido;
+        }
     }
 }

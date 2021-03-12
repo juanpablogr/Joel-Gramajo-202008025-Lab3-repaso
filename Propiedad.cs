@@ -22,5 +22,10 @@ namespace Joel_Gramajo_202008025_Lab3_repaso
             this.Dpi = dpi;
             this.Cuota = cuota;
         }
+
+        public override string ToString()
+        {
+            return this.ncasa + ";" + this.dpi + ";" + this.cuota;
+        }
     }
 }
