@@ -78,8 +78,16 @@ namespace Joel_Gramajo_202008025_Lab3_repaso
 
         void RefreshGridView()
         {
+            gdata.Clear();
+
+            for (int i = 0; i < inm.Count; i++)
+            {
+                int idx = prop.FindIndex(p => p.Dpi == inm[i].Dpi);
+                gdata.Add(new GridData(prop[idx].Nombre, prop[idx].Apellido, inm[i].Ncasa, inm[i].Cuota));
+            }
+
             dataGridView1.DataSource = null;
-            dataGridView1.DataSource = gdata;
+            dataGridView1.DataSource = gdata.OrderByDescending(p => p.Cuota_de_mantenimiento).ToList();
             dataGridView1.Refresh();
         }
 
@@ -87,6 +95,9 @@ namespace Joel_Gramajo_202008025_Lab3_repaso
         {
             if (inm.Count > 0)
             {
+                textBox8.Text = "";
+                textBox9.Text = "";
+
                 List<Orden> lst = new List<Orden>();
 
                 for (int i = 0; i < inm.Count; i++)
@@ -108,28 +119,33 @@ namespace Joel_Gramajo_202008025_Lab3_repaso
                 textBox7.Text = "Dpi: " + lst[0].Dpi + " con " + lst[0].Props + " propiedades.";
 
                 inm = inm.OrderByDescending(p => p.Cuota).ToList();
-                string s = "";
+
+                int k = 0;
+                string[] lines = { "", "", "" };
 
                 for (int i = 0; i < 3; i++)
                 {
                     if (inm.Count >= i + 1)
                     {
-                        s += "DPI propietario: " + inm[i].Dpi + " Número de casa: " + inm[i].Ncasa + " Cuota: " + inm[i].Cuota + "\n";
+                        lines[k] = "DPI propietario: " + inm[i].Dpi + " | Número casa: " + inm[i].Ncasa + " | Cuota: " + inm[i].Cuota + "\n";
+                        k++;
                     }
                 }
-                s.Trim('\n');
-                textBox8.Text = s;
+                textBox8.Lines = lines;
 
-                s = "";
+                lines[0] = "";
+                lines[1] = "";
+                lines[2] = "";
+                k = 0;
                 for (int i = inm.Count - 3; i < inm.Count; i++)
                 {
                     if (i >= 0)
                     {
-                        s += "DPI propietario: " + inm[i].Dpi + " Número de casa: " + inm[i].Ncasa + " Cuota: " + inm[i].Cuota + "\n";
+                        lines[k] = "DPI propietario: " + inm[i].Dpi + " | Número de casa: " + inm[i].Ncasa + " | Cuota: " + inm[i].Cuota + "\n";
+                        k++;
                     }
                 }
-                s.Trim('\n');
-                textBox9.Text = s;
+                textBox9.Lines = lines;
 
                 lst = lst.OrderByDescending(p => p.Cuota_total).ToList();
                 textBox10.Text = "DPI: " + lst[0].Dpi + " Cuota total: " + lst[0].Cuota_total;
@@ -145,6 +161,8 @@ namespace Joel_Gramajo_202008025_Lab3_repaso
         {
             LoadPropietarios();
             LoadInmuebles();
+            RefreshInfo();
+            RefreshGridView();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -170,26 +188,29 @@ namespace Joel_Gramajo_202008025_Lab3_repaso
             double n;
             int idx = prop.FindIndex(p => p.Dpi == textBox5.Text);
 
-            if (textBox6.Text != "" && idx != -1 && double.TryParse(textBox4.Text, out n))
+            if (idx != -1)
             {
-                if (inm.FindIndex(p => p.Ncasa == textBox6.Text) == -1)
+                if (textBox6.Text != "" && double.TryParse(textBox4.Text, out n))
                 {
-                    Propiedad j = new Propiedad(textBox6.Text, textBox5.Text, n);
-                    inm.Add(j);
-                    SaveInmuebles();
+                    if (inm.FindIndex(p => p.Ncasa == textBox6.Text) == -1)
+                    {
+                        Propiedad j = new Propiedad(textBox6.Text, textBox5.Text, n);
+                        inm.Add(j);
+                        SaveInmuebles();
 
-                    gdata.Add(new GridData(prop[idx], j));
-                    RefreshGridView();
+                        RefreshGridView();
 
-                    RefreshInfo();
+                        RefreshInfo();
 
-                    textBox6.Text = "";
-                    textBox5.Text = "";
-                    textBox4.Text = "";
+                        textBox6.Text = "";
+                        textBox5.Text = "";
+                        textBox4.Text = "";
+                    }
+                    else MessageBox.Show("ERROR: La propiedad ya existe!");
                 }
-                else MessageBox.Show("ERROR: La propiedad ya existe!");
+                else MessageBox.Show("ERROR: Datos inválidos!");
             }
-            else MessageBox.Show("ERROR: Datos inválidos!");
+            else MessageBox.Show("ERROR: El DPI ingresado no está registrado!");
         }
     }
 }

@@ -18,20 +18,12 @@ namespace Joel_Gramajo_202008025_Lab3_repaso
         public string Numero_de_casa { get => numero_de_casa; set => numero_de_casa = value; }
         public double Cuota_de_mantenimiento { get => cuota_de_mantenimiento; set => cuota_de_mantenimiento = value; }
 
-        public GridData(string nombre, string apellido, string ncasa, float cuota)
+        public GridData(string nombre, string apellido, string ncasa, double cuota)
         {
             this.Nombre_propietario = nombre;
             this.Apellido_propietario = apellido;
             this.Numero_de_casa = ncasa;
             this.Cuota_de_mantenimiento = cuota;
-        }
-
-        public GridData(Propietario prop, Propiedad inm)
-        {
-            this.Nombre_propietario = prop.Nombre;
-            this.Apellido_propietario = prop.Apellido;
-            this.Numero_de_casa = inm.Ncasa;
-            this.Cuota_de_mantenimiento = inm.Cuota;
         }
     }
 }
