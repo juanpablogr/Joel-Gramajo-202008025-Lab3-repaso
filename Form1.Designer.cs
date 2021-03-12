@@ -172,7 +172,7 @@ namespace Joel_Gramajo_202008025_Lab3_repaso
             this.groupBox1.Size = new System.Drawing.Size(277, 148);
             this.groupBox1.TabIndex = 15;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Campo para agregar porpietarios";
+            this.groupBox1.Text = "Campo para agregar propietarios";
             // 
             // button1
             // 
@@ -182,6 +182,7 @@ namespace Joel_Gramajo_202008025_Lab3_repaso
             this.button1.TabIndex = 9;
             this.button1.Text = "Agregar";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // groupBox2
             // 
@@ -194,7 +195,7 @@ namespace Joel_Gramajo_202008025_Lab3_repaso
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Location = new System.Drawing.Point(323, 13);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(277, 149);
+            this.groupBox2.Size = new System.Drawing.Size(280, 149);
             this.groupBox2.TabIndex = 16;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Campo para agregar propiedades";
@@ -213,7 +214,7 @@ namespace Joel_Gramajo_202008025_Lab3_repaso
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(13, 347);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(587, 237);
+            this.dataGridView1.Size = new System.Drawing.Size(590, 237);
             this.dataGridView1.TabIndex = 17;
             // 
             // label7
@@ -322,6 +323,7 @@ namespace Joel_Gramajo_202008025_Lab3_repaso
             this.Controls.Add(this.groupBox1);
             this.Name = "Form1";
             this.Text = "Control de propiedades";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
