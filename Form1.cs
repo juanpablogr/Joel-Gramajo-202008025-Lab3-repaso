@@ -95,14 +95,13 @@ namespace Joel_Gramajo_202008025_Lab3_repaso
         {
             if (inm.Count > 0)
             {
-                textBox8.Text = "";
-                textBox9.Text = "";
+                int idx;
 
                 List<Orden> lst = new List<Orden>();
 
                 for (int i = 0; i < inm.Count; i++)
                 {
-                    int idx = lst.FindIndex(p => p.Dpi == inm[i].Dpi);
+                    idx = lst.FindIndex(p => p.Dpi == inm[i].Dpi);
 
                     if (idx == -1)
                     {
@@ -116,7 +115,8 @@ namespace Joel_Gramajo_202008025_Lab3_repaso
                 }
 
                 lst = lst.OrderByDescending(p => p.Props).ToList();
-                textBox7.Text = "Dpi: " + lst[0].Dpi + " con " + lst[0].Props + " propiedades.";
+                idx = prop.FindIndex(p => p.Dpi == lst[0].Dpi);
+                textBox7.Text = "Info propietario (DPI;Nombre;Apellido): " + prop[idx].ToString() + " con " + lst[0].Props + " propiedades.";
 
                 inm = inm.OrderByDescending(p => p.Cuota).ToList();
 
@@ -127,7 +127,8 @@ namespace Joel_Gramajo_202008025_Lab3_repaso
                 {
                     if (inm.Count >= i + 1)
                     {
-                        lines[k] = "DPI propietario: " + inm[i].Dpi + " | Número casa: " + inm[i].Ncasa + " | Cuota: " + inm[i].Cuota + "\n";
+                        idx = prop.FindIndex(p => p.Dpi == inm[i].Dpi);
+                        lines[k] = "Info propietario (DPI;Nombre;Apellido): " + prop[idx].ToString() + " | Número casa: " + inm[i].Ncasa + " | Cuota: " + inm[i].Cuota + "\n";
                         k++;
                     }
                 }
@@ -141,14 +142,16 @@ namespace Joel_Gramajo_202008025_Lab3_repaso
                 {
                     if (i >= 0)
                     {
-                        lines[k] = "DPI propietario: " + inm[i].Dpi + " | Número de casa: " + inm[i].Ncasa + " | Cuota: " + inm[i].Cuota + "\n";
+                        idx = prop.FindIndex(p => p.Dpi == inm[i].Dpi);
+                        lines[k] = "Info propietario (DPI;Nombre;Apellido): " + prop[idx].ToString() + " | Número de casa: " + inm[i].Ncasa + " | Cuota: " + inm[i].Cuota + "\n";
                         k++;
                     }
                 }
                 textBox9.Lines = lines;
 
                 lst = lst.OrderByDescending(p => p.Cuota_total).ToList();
-                textBox10.Text = "DPI: " + lst[0].Dpi + " Cuota total: " + lst[0].Cuota_total;
+                idx = prop.FindIndex(p => p.Dpi == lst[0].Dpi);
+                textBox10.Text = "Info propietario (DPI;Nombre;Apellido): " + prop[idx].ToString() + " Cuota total: " + lst[0].Cuota_total;
             }
         }
 
@@ -167,7 +170,7 @@ namespace Joel_Gramajo_202008025_Lab3_repaso
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (textBox1.Text != "" && textBox2.Text != "" && textBox3.Text != "")
+            if (textBox1.Text != "" && textBox2.Text != "" && textBox3.Text != "" && !textBox1.Text.Contains(";") && !textBox2.Text.Contains(";") && !textBox3.Text.Contains(";"))
             {
                 if (prop.FindIndex(p => p.Dpi == textBox1.Text) == -1)
                 {
@@ -190,7 +193,7 @@ namespace Joel_Gramajo_202008025_Lab3_repaso
 
             if (idx != -1)
             {
-                if (textBox6.Text != "" && double.TryParse(textBox4.Text, out n))
+                if (textBox6.Text != "" && double.TryParse(textBox4.Text, out n) && !textBox6.Text.Contains(";") && !textBox5.Text.Contains(";") && !textBox4.Text.Contains(";"))
                 {
                     if (inm.FindIndex(p => p.Ncasa == textBox6.Text) == -1)
                     {
